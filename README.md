@@ -6,13 +6,13 @@
 
  o Registration  
  
- o Encryption and Upload
+ o Encryption and Upload:
  After selecting a file the program encrypts it by prompting and uploads it to firebase storage 
 
- o Download and Decryption
+ o Download and Decryption:
  The required file can be selected from the management tab and downloaded. After downloading the file, a prompt will be shown for decryption password.
 
- o Deletion
+ o Deletion:
  The required file can be selected from the management tab and deleted from firebase storage.
 
 * Note: This is the GUI repo. The program wont run unless its placed in a directory with the backend scripts.  
