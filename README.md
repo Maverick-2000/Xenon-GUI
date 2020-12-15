@@ -22,10 +22,18 @@
 
 ![Registration](https://raw.githubusercontent.com/Maverick-2000/Xenon-GUI/master/Screenshots/screenie-0.jpg)
 
+<h3> Login </h3>
+
 ![Login](https://raw.githubusercontent.com/Maverick-2000/Xenon-GUI/master/Screenshots/screenie-1.jpg)
+
+<h3> Main Form (Upload Tab) </h3>
 
 ![Main Form (Upload Tab)](https://raw.githubusercontent.com/Maverick-2000/Xenon-GUI/master/Screenshots/screenie-2.jpg)
 
+<h3> Main Form (Management Tab) </h3>
+
 ![Main Form (Management Tab)](https://raw.githubusercontent.com/Maverick-2000/Xenon-GUI/master/Screenshots/screenie-4.jpg)
+
+<h3> About </h3>
 
 ![About](https://raw.githubusercontent.com/Maverick-2000/Xenon-GUI/master/Screenshots/screenie-6.jpg)
