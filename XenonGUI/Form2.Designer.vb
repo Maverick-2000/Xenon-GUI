@@ -295,6 +295,7 @@ Partial Class Form2
         Me.ClientSize = New System.Drawing.Size(738, 456)
         Me.Controls.Add(Me.MetroTabControl1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MaximizeBox = False
         Me.Name = "Form2"
         Me.Resizable = False
         Me.Style = MetroFramework.MetroColorStyle.Magenta

@@ -64,7 +64,7 @@ Public Class Form2 'Class Form 2
         'Start encryption
         TextBox2.Text += Newline + "Encrypting...." 'Set upload console (i.e Textbox2 ) value to a newline and then display Encrypting 
         Dim proc As Process = New Process 'make a new process object called proc
-        proc.StartInfo.FileName = "C:\Python37\python.exe" 'Default Python Installation
+        proc.StartInfo.FileName = "python.exe" 'Default Python Installation
         proc.StartInfo.Arguments = "AesCrypt.py -f " + Chr(34) + TextBox1.Text + Chr(34) + " -p " + Form3.Password.Text + " -e" 'call the script AesCrypt.py and pass the parameters
         proc.StartInfo.UseShellExecute = False 'required for redirect.
         proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden 'don't show commandprompt.
@@ -85,7 +85,7 @@ Public Class Form2 'Class Form 2
         TextBox2.Text += Newline + "Updating Metadata.." 'Set upload console (i.e Textbox2 ) value to a newline and then display Updating Metadata..
         Try 'Try to update uploads.txt (i.e metadata) in firebase
             Dim meta As Process = New Process 'make a new process object called meta
-            meta.StartInfo.FileName = "C:\Python37\python.exe" 'Default Python Installation
+            meta.StartInfo.FileName = "python.exe" 'Default Python Installation
             meta.StartInfo.Arguments = "upload.py -u " + Form1.TextBox1.Text + " -p " + Form1.TextBox2.Text + " -f uploads.txt" 'call the script upload.py and pass the parameters
             meta.StartInfo.UseShellExecute = False 'required for redirect.
             meta.StartInfo.WindowStyle = ProcessWindowStyle.Hidden 'don't show commandprompt.
@@ -126,7 +126,7 @@ Public Class Form2 'Class Form 2
             Try 'Try to download
                 'Start Download
                 Dim download As Process = New Process 'make a new process object called download
-                download.StartInfo.FileName = "C:\Python37\python.exe" 'Default Python Installation
+                download.StartInfo.FileName = "python.exe" 'Default Python Installation
                 download.StartInfo.Arguments = "download.py -u " + Form1.TextBox1.Text + " -p " + Form1.TextBox2.Text + " -f " + Chr(34) + filetodownload + Chr(34) 'call the script download.py and pass the parameters
                 download.StartInfo.UseShellExecute = False 'required for redirect.
                 download.StartInfo.WindowStyle = ProcessWindowStyle.Hidden 'don't show commandprompt.
@@ -147,7 +147,7 @@ Public Class Form2 'Class Form 2
                         Form3.Password.Text = "" 'Clear text for Password for encryption/decryption form (i.e Form3) 
                         Form3.ShowDialog() 'Show Password for encryption/decryption form (i.e Form3) as dialog
                         Dim decrypt As Process = New Process 'make a new process object called decrypt
-                        decrypt.StartInfo.FileName = "C:\Python37\python.exe" 'Default Python Installation
+                        decrypt.StartInfo.FileName = "python.exe" 'Default Python Installation
                         decrypt.StartInfo.Arguments = "AesCrypt.py -f " + Chr(34) + "Downloads\" + filetodownload + Chr(34) + " -p " + Form3.Password.Text + " -d" 'call the script AesCrypt.py and pass the parameters
                         decrypt.StartInfo.UseShellExecute = False 'required for redirect.
                         decrypt.StartInfo.WindowStyle = ProcessWindowStyle.Hidden 'don't show commandprompt.
@@ -189,7 +189,7 @@ Public Class Form2 'Class Form 2
             Try 'try to delete
                 'start delete
                 Dim delete As Process = New Process 'make a new process object called delete
-                delete.StartInfo.FileName = "C:\Python37\python.exe" 'Default Python Installation
+                delete.StartInfo.FileName = "python.exe" 'Default Python Installation
                 delete.StartInfo.Arguments = "delete.py -u " + Form1.TextBox1.Text + " -p " + Form1.TextBox2.Text + " -f " + Chr(34) + filetodelete + Chr(34) 'call the script delete.py and pass the parameters
                 delete.StartInfo.UseShellExecute = False 'required for redirect.
                 delete.StartInfo.WindowStyle = ProcessWindowStyle.Hidden 'don't show commandprompt.
@@ -203,10 +203,11 @@ Public Class Form2 'Class Form 2
                     TextBox5.Text += Newline + "Deletion successful" 'Set management console (i.e Textbox5 ) value to a newline and then display Deletion successful
                     MsgBox("Deleted successfully") 'Display message 
                     Try
+                        Me.Cursor = Cursors.WaitCursor
                         'update metadata (i.e uploads.txt) in firebase
                         TextBox5.Text += Newline + "Updating metadata..." 'Set management console (i.e Textbox5 ) value to a newline and then display Updating metadata
                         Dim meta As Process = New Process 'make a new process object called meta
-                        meta.StartInfo.FileName = "C:\Python37\python.exe" 'Default Python Installation
+                        meta.StartInfo.FileName = "python.exe" 'Default Python Installation
                         meta.StartInfo.Arguments = "upload.py -u " + Form1.TextBox1.Text + " -p " + Form1.TextBox2.Text + " -f uploads.txt" 'call the script upload.py and pass the parameters
                         meta.StartInfo.UseShellExecute = False 'required for redirect.
                         meta.StartInfo.WindowStyle = ProcessWindowStyle.Hidden 'don't show commandprompt.
@@ -223,14 +224,19 @@ Public Class Form2 'Class Form 2
                             ListBox1.Items.Add(r.ReadLine) 'Add each line to the Files on Cloud list (i.e ListBox1)
                         End While
                         r.Close() 'Close stream reader to flush all the buffers
+                        Me.Cursor = Cursors.Default
+                        TextBox5.Text += Newline + "Metadata update complete..."
                     Catch ex As Exception
                         MsgBox("Error") 'Display message upon exception
+                        Me.Cursor = Cursors.Default
                     End Try
                 Else
                     MsgBox("File not found") 'if script returns error
+                    Me.Cursor = Cursors.Default
                 End If
                 'Do nothing if exception occurs
             Catch ex As Exception
+                Me.Cursor = Cursors.Default
             End Try
         End If
     End Sub

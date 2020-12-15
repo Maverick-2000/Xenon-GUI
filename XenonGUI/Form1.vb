@@ -12,13 +12,18 @@ Public Class Form1 'Class from 1
     Public Value As String 'Value variable as public so it can be used anywhere
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load 'Subroutine for form load
+        If (Not System.IO.Directory.Exists("Downloads")) Then
+            System.IO.Directory.CreateDirectory("Downloads")
+        End If
         TextBox1.Select() 'when login form loads textbox1 (email) should be selected
+
     End Sub
 
     Private Sub MetroButton1_Click(sender As Object, e As EventArgs) Handles MetroButton1.Click 'subroutine when login button is clicked
         Try 'Try to login
+            Me.Cursor = Cursors.WaitCursor
             Dim proc As Process = New Process 'make a new process object called proc
-            proc.StartInfo.FileName = "C:\Python37\python.exe" 'Default Python Installation
+            proc.StartInfo.FileName = "python.exe" 'Default Python Installation
             proc.StartInfo.Arguments = "login.py -u " + TextBox1.Text + " -p " + TextBox2.Text 'call the script login.py and pass the parameters
             proc.StartInfo.UseShellExecute = False 'required for redirect.
             proc.StartInfo.WindowStyle = ProcessWindowStyle.Hidden 'don't show commandprompt.
@@ -33,7 +38,7 @@ Public Class Form1 'Class from 1
                 Try 'Try to download
                     'check for uploads.txt in firebase (i.e. the meta data) if it exists downlolad it 
                     Dim download As Process = New Process 'make a new process object called download
-                    download.StartInfo.FileName = "C:\Python37\python.exe" 'Default Python Installation
+                    download.StartInfo.FileName = "python.exe" 'Default Python Installation
                     download.StartInfo.Arguments = "download.py -u " + TextBox1.Text + " -p " + TextBox2.Text + " -f uploads.txt" 'call the script download.py and pass the parameters
                     download.StartInfo.UseShellExecute = False 'required for redirect.
                     download.StartInfo.WindowStyle = ProcessWindowStyle.Hidden 'don't show commandprompt.
@@ -44,20 +49,26 @@ Public Class Form1 'Class from 1
                     download.BeginOutputReadLine() 'start reading the redirected output
                     download.WaitForExit() 'wait for the script to complete execution
                     If Value = "Done" Then 'check for string Done i.e uploads.txt exists in firebase
+                        Me.Cursor = Cursors.Default
                         Form2.Show() 'Show Main Form i.e Form2
                         Me.Hide() ' hide Login Form
+
                     Else 'uploads.txt doesnt exist in firebase
                         MsgBox("Welcome") 'consider the user to be a new user since uploads.txt doesnt exist in firebase
+                        Me.Cursor = Cursors.Default
                         Form2.Show() 'Show Main Form i.e Form2
                         Me.Hide() 'hide Login Form
                     End If
                 Catch ex As Exception
+                    Me.Cursor = Cursors.Default
                     MsgBox("Unknown Error") 'show message if exception occurs while exceuting download.py
                 End Try
             Else
+                Me.Cursor = Cursors.Default
                 MsgBox(Value) 'show script output if login fails (i.e invalid username/password)
             End If
         Catch ex As Exception
+            Me.Cursor = Cursors.Default
             MsgBox("Unknown Error") 'show message if exception occurs while exceuting login.py
         End Try
     End Sub
@@ -79,7 +90,7 @@ Public Class Form1 'Class from 1
         Else
             Try 'try to execute forgot password script
                 Dim forgot As Process = New Process 'make a new process object called forgot
-                forgot.StartInfo.FileName = "C:\Python37\python.exe" 'Default Python Installation
+                forgot.StartInfo.FileName = "python.exe" 'Default Python Installation
                 forgot.StartInfo.Arguments = "forgot.py -u " + TextBox1.Text 'call the script forgot.py and pass the parameters
                 forgot.StartInfo.UseShellExecute = False 'required for redirect.
                 forgot.StartInfo.WindowStyle = ProcessWindowStyle.Hidden 'don't show commandprompt.
