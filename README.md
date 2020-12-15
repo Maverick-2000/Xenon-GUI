@@ -15,7 +15,7 @@
  o Deletion:
  The required file can be selected from the management tab and deleted from firebase storage.
 
-* Note: This is the GUI repo. The program wont run unless its placed in a directory with the backend scripts.  
+* Note: This is the GUI repo. The program wont run unless its placed in a directory with the backend scripts. (https://github.com/Maverick-2000/Xenon-Scripts)
 
 <h2> Screenshots </h2>
 <h3> Registration </h3>
